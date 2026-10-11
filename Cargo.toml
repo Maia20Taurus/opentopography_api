@@ -1,0 +1,8 @@
+[package]
+name = "opentopography_api"
+version = "0.1.0"
+edition = "2024"
+description = "A gateway to the OpenTopography API, used 
+for obtaining geographic data."
+
+[dependencies]
