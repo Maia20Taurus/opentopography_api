@@ -1,11 +1,11 @@
-struct API {
-    API_Key: String
+pub struct API {
+    api_key: String
 }
 
 impl API {
-    pub fun new(API_Key) -> Self {
+    pub fn new(api_key: String) -> Self {
         Self {
-            API_Key
+            api_key
         }
     }
 }
