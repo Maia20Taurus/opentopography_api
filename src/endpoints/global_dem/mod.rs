@@ -1,4 +1,7 @@
 use crate::{ElevationData, Endpoint};
+
+// deriving debug allows the enums to be converted to strings easily
+#[derive(Debug)]
 pub enum Endpoints {
     SRTMGL1,
     SRTMGL3,
@@ -23,12 +26,11 @@ impl Endpoint for Endpoints {
     fn get(
         &self,
         api_key: &str,
-        dataset_name: &str,
         south: &f64,
         north: &f64,
         east: &f64,
         west: &f64,
     ) -> Result<ElevationData, String> {
-        
+        let dataset_name: String = format!("{:?}", self);
     }
 }
