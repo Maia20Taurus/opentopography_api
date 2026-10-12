@@ -1,3 +1,5 @@
-use API;
+use opentopography_api::API;
 
-let opentopography_API = API.new();
+fn main() {
+    let opentopography_API = API::new(String::from("my_key"));
+}
