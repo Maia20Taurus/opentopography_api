@@ -1,4 +1,6 @@
 use crate::{ElevationData, Endpoint};
+use reqwest::blocking::*;
+use std::io::Read;
 
 // deriving debug allows the enums to be converted to strings easily
 #[derive(Debug)]
@@ -25,7 +27,7 @@ pub enum Endpoints {
 impl Endpoints {
     fn as_str(&self) -> &'static str {
         match self {
-            Endpoints::SrtmGl1 => "SRTMGl1",
+            Endpoints::SrtmGl1 => "SRTMGL1",
             Endpoints::SrtmGl3 => "SRTMGL3",
             Endpoints::SrtmGl1E => "SRTMGL1_E",
             Endpoints::Aw3d30 => "AW3D30",
@@ -61,6 +63,19 @@ impl Endpoint for Endpoints {
         east: &f64,
         west: &f64,
     ) -> Result<ElevationData, String> {
+        let request_url: String = format! (
+            "https://portal.opentopography.org/API/globaldem?demtype={}&south={}&north={}&east={}&west={}&API_Key={}",
+            self.to_string(),south,north,east,west,api_key
+        );
+
+        let mut res = reqwest::blocking::get(&request_url).unwrap();
+        let mut body = String::new();
+        res.read_to_string(&mut body).unwrap();
+
+        println!("Status: {}", res.status());
+        println!("Headers:\n{:#?}", res.headers());
+        println!("Body:\n{}", body);
+
         Err(String::from("Endpoint not implemented"))
     }
 }

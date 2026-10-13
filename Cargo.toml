@@ -6,3 +6,5 @@ description = "A gateway to the OpenTopography API, used for obtaining geographi
 readme = "./README.md"
 
 [dependencies]
+reqwest = { version = "0.13.5", features = ["blocking"] }
+
