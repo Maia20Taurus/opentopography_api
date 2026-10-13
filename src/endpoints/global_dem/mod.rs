@@ -61,6 +61,6 @@ impl Endpoint for Endpoints {
         east: &f64,
         west: &f64,
     ) -> Result<ElevationData, String> {
-        
+        Err(String::from("Endpoint not implemented"))
     }
 }
