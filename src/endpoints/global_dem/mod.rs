@@ -68,6 +68,10 @@ impl Endpoint for Endpoints {
             self.to_string(),south,north,east,west,api_key
         );
 
+        // The geotiff_reader crate can accept a byte buffer as Geotiff input
+        // reqwest::blocking::get returns a response that has a bytes method
+        // The bytes response just needs to be converted to Vec<u8>
+
         let mut res = reqwest::blocking::get(&request_url).unwrap();
         let mut body = String::new();
         res.read_to_string(&mut body).unwrap();
