@@ -1,5 +1,4 @@
 use crate::{ElevationData, Endpoint};
-use reqwest::blocking::*;
 use std::io::Read;
 
 pub enum Endpoints {
