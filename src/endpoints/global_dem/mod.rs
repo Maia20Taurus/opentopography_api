@@ -1,4 +1,4 @@
-use crate::{ElevationData, Endpoint};
+use crate::Endpoint;
 use std::io::Read;
 use geotiff_reader::GeoTiffFile;
 
