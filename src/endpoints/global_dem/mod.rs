@@ -1,6 +1,6 @@
 use crate::Endpoint;
-use std::io::Read;
 use geotiff_reader::GeoTiffFile;
+use std::io::Read;
 
 pub enum Endpoints {
     SrtmGl1,
@@ -61,23 +61,33 @@ impl Endpoint for Endpoints {
         east: &f64,
         west: &f64,
     ) -> Result<GeoTiffFile, String> {
-        let request_url: String = format! (
+        let request_url: String = format!(
             "https://portal.opentopography.org/API/globaldem?demtype={}&south={}&north={}&east={}&west={}&API_Key={}",
-            self.to_string(),south,north,east,west,api_key
+            self.to_string(),
+            south,
+            north,
+            east,
+            west,
+            api_key
         );
 
-        // The geotiff_reader crate can accept a byte buffer as Geotiff input
-        // reqwest::blocking::get returns a response that has a bytes method
-        // The bytes response just needs to be converted to Vec<u8>
+        let res_result = reqwest::blocking::get(&request_url);
 
-        let mut res = reqwest::blocking::get(&request_url).unwrap();
-        let mut body = String::new();
-        res.read_to_string(&mut body).unwrap();
+        let res = match res_result {
+            Ok(res) => res,
+            Err(e) => return Err(e.to_string())
+        };
 
-        println!("Status: {}", res.status());
-        println!("Headers:\n{:#?}", res.headers());
-        println!("Body:\n{}", body);
+        let body = match res.bytes() {
+            Ok(res_bytes) => res_bytes.to_vec(),
+            Err(e) => return Err(e.to_string())
+        };
+        
+        let gtiff = match GeoTiffFile::from_bytes(body) {
+            Ok(gtiff) => gtiff,
+            Err(e) => return Err(e.to_string())
+        };
 
-        Err(String::from("Endpoint not implemented"))
+        Ok(gtiff)
     }
 }
