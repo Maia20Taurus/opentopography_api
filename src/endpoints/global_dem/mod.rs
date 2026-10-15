@@ -1,5 +1,6 @@
 use crate::Endpoint;
 use geotiff_reader::GeoTiffFile;
+use reqwest::StatusCode;
 
 pub enum Endpoints {
     SrtmGl1,
@@ -75,6 +76,13 @@ impl Endpoint for Endpoints {
         let res = match res_result {
             Ok(res) => res,
             Err(e) => return Err(e.to_string())
+        };
+
+        match res.status() {
+            StatusCode::OK => (),
+            StatusCode::UNAUTHORIZED => return Err(String::from("BadApiKey")),
+            StatusCode::BAD_REQUEST => return Err(String::from("BadRequest. Check coordinates.")),
+            _ => return Err(format!("RequestError: {}", res.status()))
         };
 
         let body = match res.bytes() {
