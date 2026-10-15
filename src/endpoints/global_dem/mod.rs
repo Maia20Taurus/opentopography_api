@@ -1,6 +1,5 @@
 use crate::Endpoint;
 use geotiff_reader::GeoTiffFile;
-use std::io::Read;
 
 pub enum Endpoints {
     SrtmGl1,
