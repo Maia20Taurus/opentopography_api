@@ -1,5 +1,6 @@
 use crate::{ElevationData, Endpoint};
 use std::io::Read;
+use geotiff_reader::GeoTiffFile;
 
 pub enum Endpoints {
     SrtmGl1,
@@ -59,7 +60,7 @@ impl Endpoint for Endpoints {
         north: &f64,
         east: &f64,
         west: &f64,
-    ) -> Result<ElevationData, String> {
+    ) -> Result<GeoTiffFile, String> {
         let request_url: String = format! (
             "https://portal.opentopography.org/API/globaldem?demtype={}&south={}&north={}&east={}&west={}&API_Key={}",
             self.to_string(),south,north,east,west,api_key
