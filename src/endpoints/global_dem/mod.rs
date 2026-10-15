@@ -2,8 +2,6 @@ use crate::{ElevationData, Endpoint};
 use reqwest::blocking::*;
 use std::io::Read;
 
-// deriving debug allows the enums to be converted to strings easily
-#[derive(Debug)]
 pub enum Endpoints {
     SrtmGl1,
     SrtmGl3,
