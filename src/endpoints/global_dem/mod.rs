@@ -2,6 +2,7 @@ use crate::Endpoint;
 use geotiff_reader::GeoTiffFile;
 use reqwest::StatusCode;
 
+
 pub enum Endpoints {
     SrtmGl1,
     SrtmGl3,
