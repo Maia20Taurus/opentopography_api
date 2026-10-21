@@ -1,7 +1,7 @@
 use geotiff_reader::GeoTiffFile;
 
 pub trait Endpoint {
-    /// Query the OpenTopography API for geographic data
+    /// Query the OpenTopography API for geographic data.
     /// See https://portal.opentopography.org/apidocs/#/Public for more info
     /// and obtaining an API key
     /// 
