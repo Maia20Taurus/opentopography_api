@@ -2,7 +2,9 @@ use crate::Endpoint;
 use geotiff_reader::GeoTiffFile;
 use reqwest::StatusCode;
 
-
+/// The available endpoints for querying.
+/// See https://portal.opentopography.org/apidocs/#/Public/getGlobalDem
+/// for more info
 pub enum Endpoints {
     SrtmGl1,
     SrtmGl3,
