@@ -5,6 +5,7 @@ edition = "2024"
 description = "A gateway to the OpenTopography API, used for obtaining geographic data."
 readme = "./README.md"
 license="MIT"
+repository="https://github.com/Maia20Taurus/opentopography_api"
 
 [dependencies]
 geotiff-reader = "0.8.1"
