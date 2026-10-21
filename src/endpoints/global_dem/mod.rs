@@ -1,3 +1,6 @@
+//! Contains endpoints for the /globaldem API routes, providing access
+//! to various global topographic datasets
+
 use crate::Endpoint;
 use geotiff_reader::GeoTiffFile;
 use reqwest::StatusCode;
